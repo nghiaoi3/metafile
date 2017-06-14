@@ -21,7 +21,7 @@ app.get('/',function(req,res){
 
 app.post('/upload',function(req,res){
   upload(req, res, function (err) {
-  if (err)     throw (err);
+  if (err)     {return res.end('err is '+err)}
      res.end('successful')
   })
 })
