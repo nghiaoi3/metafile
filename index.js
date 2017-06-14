@@ -13,7 +13,7 @@ var storage = multer.diskStorage({
   }
 })
  
-var upload = multer({ storage: storage }).single('upload_file')
+var upload = multer({ storage: storage }).single('file')
 
 app.get('/',function(req,res){
     res.sendFile(__dirname+'/upload.html')
