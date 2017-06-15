@@ -27,8 +27,7 @@ app.post('/upload',function(req,res){
 	}).single('file')
 	
 	upload(req, res, function(err) {
-		res.end('File is uploaded')
-	})
+res.end('size '+req.file.fileSize)	})
 
 	
 })
