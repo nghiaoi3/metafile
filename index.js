@@ -1,13 +1,15 @@
 var express = require("express");
 var multer = require("multer");
-var fs = require("fs");
+var path = require('path');
 
 var app = express();
 
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './uploads')
+        var dest = path.join(__dirname, 'uploads');
+
+    cb(null,dest )
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname)
@@ -22,7 +24,6 @@ app.get('/',function(req,res){
 
 app.post('/upload',function(req,res){
   
-
   upload(req, res, function (err) {
   if (err)     {return res.end('err is '+err)}
      res.end('successful')
