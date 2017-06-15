@@ -6,7 +6,7 @@ var app = express();
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, './metafile/uploads')
+    cb(null, './uploads')
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname + '-' + Date.now())
@@ -19,7 +19,7 @@ app.get('/',function(req,res){
     res.sendFile(__dirname+'/upload.html')
 })
 
-app.post('/upload',function(req,res){
+app.post('/upload',upload,function(req,res){
   upload(req, res, function (err) {
   if (err)     {return res.end('err is '+err)}
      res.end('successful')
