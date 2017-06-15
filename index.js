@@ -1,8 +1,9 @@
 var express = require("express");
 var multer = require("multer");
+var path = require('path');
 
 var app = express();
-app.use(express.static(__dirname + '/uploads'));
+app.use(express.static(path.join(__dirname,'public')))
 
 
 var storage = multer.diskStorage({
@@ -21,12 +22,12 @@ app.get('/',function(req,res){
     res.sendFile(__dirname+'/upload.html')
 })
 
-app.post('/upload',function(req,res){
+app.post('/upload',upload,function(req,res){
   
-  upload(req, res, function (err) {
-  if (err)     {return res.end('err is '+err)}
-     res.end('successful')
-  })
+  if (req.file) {
+		res.json({size: req.file.size})
+	}
+	
 })
 
 //create a server
