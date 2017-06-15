@@ -11,25 +11,24 @@ var storage = multer.diskStorage({
     cb(null, './metafile/uploads/')
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname)
+    cb(null, file.originalname+ + path.extname(file.originalname))
   }
 })
-
-var upload = multer({ storage: storage })
 
 
 app.get('/',function(req,res){
     res.sendFile(__dirname+'/upload.html')
 })
 
-app.post('/upload',upload.single('file'),function(req,res){
+app.post('/upload',function(req,res){
   
-  if (req.file) {
-		res.json({size: req.file.size,
-		  name: req.file.originalname,
-
-		})
-	}
+  	var upload = multer({
+		storage: storage
+	}).single('file')
+	
+	upload(req, res, function(err) {
+		res.end('File is uploaded')
+	})
 	
 })
 
