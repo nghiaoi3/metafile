@@ -11,7 +11,7 @@ var storage = multer.diskStorage({
     cb(null, './metafile/uploads/')
   },
   filename: function (req, file, cb) {
-    cb(null, file.originalname+ + path.extname(file.originalname))
+    cb(null, file.originalname+ path.extname(file.originalname))
   }
 })
 
@@ -27,7 +27,10 @@ app.post('/upload',function(req,res){
 	}).single('file')
 	
 	upload(req, res, function(err) {
-		res.end('File is uploaded')
+		res.json({name: req.file.originalname,
+		size:req.file.size,
+		location:req.file.path
+		})
 	})
 	
 })
