@@ -6,7 +6,16 @@ var app = express();
 app.use(express.static(path.join(__dirname,'public')))
 
 
-var upload = multer({ dest: 'uploads/' })
+var storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+    cb(null, '/uploads')
+  },
+  filename: function (req, file, cb) {
+    cb(null, file.fieldname + '-' + Date.now())
+  }
+})
+
+var upload = multer({ storage: storage })
 
 
 app.get('/',function(req,res){
@@ -16,7 +25,10 @@ app.get('/',function(req,res){
 app.post('/upload',upload.single('file'),function(req,res){
   
   if (req.file) {
-		res.json({size: req.file.size})
+		res.json({size: req.file.size,
+		  name: req.file.originalname,
+
+		})
 	}
 	
 })
