@@ -1,15 +1,14 @@
 var express = require("express");
 var multer = require("multer");
-var path = require('path');
 
 var app = express();
+app.use(express.static(__dirname + '/uploads'));
 
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-        var dest = path.join(__dirname, 'uploads');
 
-    cb(null,dest )
+    cb(null,'./uploads' )
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname)
