@@ -6,29 +6,18 @@ var app = express();
 app.use(express.static(path.join(__dirname,'public')))
 
 
-var storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, './metafile/uploads/')
-  },
-  filename: function (req, file, cb) {
-    cb(null, file.originalname+ path.extname(file.originalname))
-  }
-})
+var upload = multer({ dest: 'uploads/' })
 
 
 app.get('/',function(req,res){
     res.sendFile(__dirname+'/upload.html')
 })
 
-app.post('/upload',function(req,res){
+app.post('/upload',upload.single('file'),function(req,res){
   
-  	var upload = multer({
-		storage: storage
-	}).single('file')
-	
-	upload(req, res, function(err) {
-res.end('size '+storage.destination)	})
-
+  if (req.file) {
+		res.json({size: req.file.destination})
+	}
 	
 })
 
