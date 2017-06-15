@@ -27,11 +27,9 @@ app.post('/upload',function(req,res){
 	}).single('file')
 	
 	upload(req, res, function(err) {
-		res.json({name: req.file.originalname,
-		size:req.file.size,
-		location:req.file.path
-		})
+		res.end('File is uploaded')
 	})
+
 	
 })
 
