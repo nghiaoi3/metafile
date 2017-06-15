@@ -15,7 +15,7 @@ app.get('/',function(req,res){
 app.post('/upload',upload.single('file'),function(req,res){
   
   if (req.file) {
-		res.json({name: req.file.originalname, path: req.file.path, size:req.file.size})
+		res.json({name: req.file.originalname, size:req.file.size})
 	}
 	
 })
