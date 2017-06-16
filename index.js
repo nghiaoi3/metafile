@@ -28,6 +28,11 @@ app.post('/upload',upload.single('file'),function(req,res){
 		res.json({name: req.file.originalname, size:req.file.size})
 	}
 	
+	
+	    fs.readdirSync('uploads/').forEach(function (file){
+        console.log(file);
+    });
+
 })
 
 //create a server
