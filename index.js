@@ -13,6 +13,11 @@ if (!fs.existsSync(dir)){
 }
 
 
+
+if (fs.existsSync('./uploads/96f545019df7267d46e1fcfc9698d241')) {
+console.log('yessss')}
+
+
 var upload = multer({ dest:  dir})
 
 app.get('/',function(req,res){
