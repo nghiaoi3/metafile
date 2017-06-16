@@ -23,12 +23,12 @@ app.get('/',function(req,res){
 
 app.post('/upload',upload.single('file'),function(req,res){
     
-  if (fs.existsSync('dir')) { 
+  
+  if (req.file) {
+      if (fs.existsSync('dir')) { 
 console.log('after upload : yessss')} else {
     console.log('after upload : nnooooo')
 }
-
-  if (req.file) {
       console.log(req.file.path)
 		res.json({name: req.file.originalname, size:req.file.size})
 	}
