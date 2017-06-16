@@ -19,7 +19,7 @@ app.get('/',function(req,res){
 app.post('/upload',upload.single('file'),function(req,res){
     
     if (fs.existsSync(dir)) { 
-console.log('dir before upload : yessss')
+console.log('dir before upload : ys')
            } else { 
       console.log('dir before upload : no')
      fs.mkdirSync(dir);  }
