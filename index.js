@@ -7,15 +7,12 @@ var app = express();
 
 var dir = './uploads';
 
-if (!fs.existsSync(dir)){
-    fs.mkdirSync(dir);
-    console.log('created directory uploads')
-}
+  if (fs.existsSync(dir)) { 
+console.log('before upload : yessss')
+           } else { 
+      console.log('before upload : no')
+     fs.mkdirSync(dir);  }
 
-
-
-if (fs.existsSync('./uploads/96f545019df7267d46e1fcfc9698d241')) {
-console.log('yessss')}
 
 
 var upload = multer({ dest:  dir})
@@ -25,7 +22,12 @@ app.get('/',function(req,res){
 })
 
 app.post('/upload',upload.single('file'),function(req,res){
-  
+    
+  if (fs.existsSync('dir')) { 
+console.log('after upload : yessss')} else {
+    console.log('after upload : nnooooo')
+}
+
   if (req.file) {
       console.log(req.file.path)
 		res.json({name: req.file.originalname, size:req.file.size})
