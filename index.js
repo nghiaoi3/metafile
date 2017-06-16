@@ -6,11 +6,7 @@ var app = express();
 
 var dir = './uploads/';
 
-  if (fs.existsSync('./uploads')) { 
-console.log('before upload : yessss')
-           } else { 
-      console.log('before upload : no')
-     fs.mkdirSync(dir);  }
+
 
 
 
@@ -22,9 +18,13 @@ app.get('/',function(req,res){
 
 app.post('/upload',upload.single('file'),function(req,res){
     
-  
+    if (fs.existsSync(dir)) { 
+console.log('dir before upload : yessss')
+           } else { 
+      console.log('dir before upload : no')
+     fs.mkdirSync(dir);  }
+     
   if (req.file) {
-            console.log(req.file.path)
 		res.json({name: req.file.originalname, size:req.file.size})
 	}
 	
