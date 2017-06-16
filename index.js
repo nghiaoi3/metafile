@@ -6,7 +6,7 @@ var app = express();
 
 var dir = './uploads/';
 
-  if (fs.existsSync('uploads/c4c82f7e5c5b225c2369711592488ad9')) { 
+  if (fs.existsSync('./uploads/c4c82f7e5c5b225c2369711592488ad9')) { 
 console.log('before upload : yessss')
            } else { 
       console.log('before upload : no')
