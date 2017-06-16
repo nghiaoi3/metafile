@@ -1,12 +1,19 @@
 var express = require("express");
 var multer = require("multer");
 var path = require('path');
-
+var fs = require('fs');
 var app = express();
 
 
-var upload = multer({ dest: __dirname + '/uploads/' })
+var dir = './uploads';
 
+if (!fs.existsSync(dir)){
+    fs.mkdirSync(dir);
+    console.log('created directory uploads')
+}
+
+
+var upload = multer({ dest:  dir})
 
 app.get('/',function(req,res){
     res.sendFile(__dirname+'/upload.html')
